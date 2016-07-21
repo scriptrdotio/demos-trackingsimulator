@@ -1,8 +1,8 @@
-var destinations = require("./directionservice");
-var scheduling = require("./schedulerservice");
+var destinations = require("./directionservice.js");
+var scheduling = require("./schedulerservice.js");
 var log = require("log"); log.setLevel("debug");
 
-var util = require("./util");
+var util = require("./util.js");
 var INITIAL_LAT = 40.8789008;
 var INITIAL_LONG = -73.8841953 ;
 var RADIUS = 2500;

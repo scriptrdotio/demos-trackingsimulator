@@ -1,5 +1,5 @@
-var recyclingbinManagerModule = require("../recyclingbinmanager");
-var vehicleManagerModule = require("../vehiclemanager");
+var recyclingbinManagerModule = require("../recyclingbinmanager.js");
+var vehicleManagerModule = require("../vehiclemanager.js");
 
 try {
   

@@ -1,5 +1,5 @@
-var recyclingbinManagerModule = require("../recyclingbinmanager");
-var vehicleManagerModule = require("../vehiclemanager");
+var recyclingbinManagerModule = require("../recyclingbinmanager.js");
+var vehicleManagerModule = require("../vehiclemanager.js");
 
 var TRIGGER = "* * * * ?";
 
@@ -35,7 +35,7 @@ try {
   binManager.startMonitoringRecyclingBins();  
    
   // schedule the execution of mainscheduler
-  var handle = schedule("trackingSimulator/mainscheduler", TRIGGER).result.handle;
+  var handle = schedule("trackingSimulator/mainscheduler.js", TRIGGER).result.handle;
   storage.global.scheduler.handle = handle; 
   return handle;
 }catch(exception){

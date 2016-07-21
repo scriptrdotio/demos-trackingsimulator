@@ -1,9 +1,9 @@
-var recyclingbinManagerModule = require("./recyclingbinmanager");
-var recyclingbinSchedulerServiceModule = require("./schedulerservice");
-var recyclingbinModule = require("./recyclingbin");
+var recyclingbinManagerModule = require("./recyclingbinmanager.js");
+var recyclingbinSchedulerServiceModule = require("./schedulerservice.js");
+var recyclingbinModule = require("./recyclingbin.js");
 
-var vehicleManagerModule = require("./vehiclemanager");
-var vehicleSchedulerServiceModule = require("./schedulerservice");
+var vehicleManagerModule = require("./vehiclemanager.js");
+var vehicleSchedulerServiceModule = require("./schedulerservice.js");
 
 var CITY_CHANNEL = "city_channel";
 

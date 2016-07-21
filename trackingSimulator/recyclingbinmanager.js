@@ -1,6 +1,6 @@
-var cityservice = require("./cityservice");
-var binSchedulerserviceModule =  require("./schedulerservice");
-var recyclingbinModule = require("./recyclingbin");
+var cityservice = require("./cityservice.js");
+var binSchedulerserviceModule =  require("./schedulerservice.js");
+var recyclingbinModule = require("./recyclingbin.js");
 var log = require("log");
 log.setLevel("info");
 

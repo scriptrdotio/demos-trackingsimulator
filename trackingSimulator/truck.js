@@ -1,5 +1,5 @@
-var vehicleModule = require("./vehicle");
-var recyclingbinManagerModule = require("./recyclingbinmanager");
+var vehicleModule = require("./vehicle.js");
+var recyclingbinManagerModule = require("./recyclingbinmanager.js");
 var log = require("log");
 log.setLevel("debug");
 

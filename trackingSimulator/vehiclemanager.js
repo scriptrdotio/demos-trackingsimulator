@@ -1,6 +1,6 @@
-var vehicleSchedulerServiceModule = require("./schedulerservice");
-var vehicleModule = require("./vehicle");
-var destinations = require("./directionservice");
+var vehicleSchedulerServiceModule = require("./schedulerservice.js");
+var vehicleModule = require("./vehicle.js");
+var destinations = require("./directionservice.js");
 var log = require("log");
 log.setLevel("info");
 

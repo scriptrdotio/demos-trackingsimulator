@@ -1,4 +1,3 @@
-var TRIGGER = "* * * * ?";
 
 /**
  * @class SchedulerService

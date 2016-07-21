@@ -14,7 +14,7 @@ try {
 
   var binManager = new recyclingbinManagerModule.RecyclingBinManager();
   var binSchedulerService = new recyclingbinSchedulerServiceModule.SchedulerService("RecyclingBin");
-  var vehicleManager = new vehicleManagerModule.VehicleManager("./truck", "Truck");
+  var vehicleManager = new vehicleManagerModule.VehicleManager("./truck.js", "Truck");
   var vehicleSchedulerService = new vehicleSchedulerServiceModule.SchedulerService("Vehicle");
   
   /*

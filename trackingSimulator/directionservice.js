@@ -1,4 +1,4 @@
-var util = require("./util");
+var util = require("./util.js");
 var http = require("http");
 //var log = require("log"); 
 //log.setLevel("info");

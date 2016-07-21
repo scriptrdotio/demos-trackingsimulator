@@ -16,7 +16,7 @@ try {
     storage.global.city = {};
   }
     
-  var vehicleManager =  new vehicleManagerModule.VehicleManager("./truck", "Truck");
+  var vehicleManager =  new vehicleManagerModule.VehicleManager("./truck.js", "Truck");
   var binManager = new recyclingbinManagerModule.RecyclingBinManager();
   
   // clean-up any ongoing simulation

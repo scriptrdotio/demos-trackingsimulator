@@ -1,4 +1,3 @@
-
 /**
  * @class SchedulerService
  * @param {String} type: the type of data handled by this scheduler. To be specified by sub-classes

@@ -1,0 +1,22 @@
+var utils = require("./utils");
+
+var trucks_info = [{"truck_id": 1122, "truck_name": "The Annihilator"},{"truck_id": 1133, "truck_name": "Asphalt Assault"},{"truck_id": 1144, "truck_name": "Bone Crusher"},{"truck_id": 1155, "truck_name": "Bloodhound"}];
+
+var data = {"vehicles":["{\"busy\":false,\"target\":\"\",\"id\":\"wmwcdjfolyl1fkv8jj5s\",\"moving\":false,\"tripDuration\":0,\"currentLocation\":{\"lat\":40.870564349791756,\"long\":-73.8839044307325},\"pointsToDestination\":[]}","{\"busy\":false,\"target\":\"\",\"id\":\"26k385hwrxfsn3hog7ny\",\"moving\":false,\"tripDuration\":0,\"currentLocation\":{\"lat\":40.89027878606886,\"long\":-73.88969397509005},\"pointsToDestination\":[]}"],"bins":["{\"id\":\"w9b1xcwoh42rdkz62a0m\",\"address\":\"Allerton Ave & Moshulu Pkway\",\"borough\":\"Bronx\",\"latitude\":\"40.8488907878\",\"longitude\":\"-73.8771283938\",\"park_site_name\":\"Allerton Ballfields\",\"site_type\":\"Subproperty\",\"capacity\":79,\"assignedTo\":null}","{\"id\":\"hv8pk6pnezq6sk2blknf\",\"address\":\"Arthur Ave & 187 St\",\"borough\":\"Bronx\",\"latitude\":\"40.85557\",\"longitude\":\"-73.887564999999995\",\"park_site_name\":\"Arthur Ave & E 187 St\",\"site_type\":\"Outdoor\",\"capacity\":37,\"assignedTo\":null}","{\"id\":\"i7hiqc1x4akqeg3ia1mw\",\"address\":\"E 227 St/Bronx River Pkway\",\"borough\":\"Bronx\",\"latitude\":\"40.890848989\",\"longitude\":\"-73.864223918\",\"park_site_name\":\"227th St. Plgd\",\"site_type\":\"Subproperty\",\"capacity\":40,\"assignedTo\":null}"]}
+
+//Get randomly 1 truck from the list
+var truckInfo = trucks_info[Math.floor(Math.random() * trucks_info.length)];
+
+//Get 1 point in 2 km radius
+var pointData = utils.generateRandomPoint({'lat': 32.747942, 'lng':-117.154658}, 2000);
+
+//Merge geolocation with truck info
+for (var attrname in truckInfo) { 
+  pointData[attrname] = truckInfo[attrname]; 
+}
+
+
+// Generates 1 points that is in a 1km radius from the given lat and lng point.
+publish('trackingData', data, false);
+
+return [pointData];			

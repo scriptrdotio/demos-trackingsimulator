@@ -1,0 +1,25 @@
+html, body {
+	height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+   height: 100%;
+   width: 70%;
+   float: left;
+}
+
+#tracker {
+    width: 30%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    background: #fafafa;
+    font-size: 14px;
+    color: #333;
+    padding-left: 10px;
+    line-height: 1.6;
+}

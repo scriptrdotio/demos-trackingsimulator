@@ -30,6 +30,7 @@ The UI subscribes to a channel using a WebSocket connection in order to receives
 - *util*: provides utiliy functions (generate id, transform polyline into an array of points, etc.)
 
 ## Configuration
+- Create channel as anonymous publish/subscribe with "city_channel" as name.
 - Google Map directions API key
   - directionservice, in DirectionService constructor function, this.apiKey
 - Bin usage
@@ -41,3 +42,5 @@ The UI subscribes to a channel using a WebSocket connection in order to receives
 Position is calculated using lat,long + random() * radius
 - Scheduled script execution frequency
   - TRIGGER, in api/start
+- Configuring the map
+  - Update static/config.js  http baseUrl to point to your account subdomain & websocket url to have your own token.

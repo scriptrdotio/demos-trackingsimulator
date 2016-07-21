@@ -1,7 +1,6 @@
 var util = require("./util");
 var log = require("log"); 
 log.setLevel("debug");
-var BIN_CHANNEL = "bins";
 
 var MAX_USAGE = 45; // change this to accelerate the pace at which recycling bins are filled
 

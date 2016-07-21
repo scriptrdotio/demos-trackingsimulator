@@ -1,0 +1,43 @@
+var recyclingbinManagerModule = require("../recyclingbinmanager");
+var vehicleManagerModule = require("../vehiclemanager");
+
+var TRIGGER = "* * * * ?";
+
+try {
+  
+  /*
+   * initialize storage if needed
+   */
+  if (!storage.global.scheduler) {
+    storage.global.scheduler = {};
+  }
+  
+  if (!storage.global.city) {
+    storage.global.city = {};
+  }
+    
+  var vehicleManager =  new vehicleManagerModule.VehicleManager("./truck", "Truck");
+  var binManager = new recyclingbinManagerModule.RecyclingBinManager();
+  
+  // clean-up any ongoing simulation
+  vehicleManager.stopMonitoringVehicles();
+  vehicleManager.removeAll();
+  binManager.stopMonitoringRecyclingBins();
+  binManager.removeAll();
+  
+  // stop scheduled script instances if any
+  var handle = storage.global.scheduler.handle;
+  if (handle) {
+   unschedule(handle);
+  }  
+
+  vehicleManager.startMonitoringVehicles(request.parameters.trucks);
+  binManager.startMonitoringRecyclingBins();  
+   
+  // schedule the execution of mainscheduler
+  var handle = schedule("trackingSimulator/mainscheduler", TRIGGER).result.handle;
+  storage.global.scheduler.handle = handle; 
+  return handle;
+}catch(exception){
+  return exception;
+}

@@ -1,5 +1,7 @@
 # demos-trackingsimulator
 
+*Note*: content of this file is taken from https://docs.google.com/a/scriptr.io/presentation/d/1zJC52WTVITHf3Lzs0HtSqodIjMjfhPxLhOSGxerqEOY/edit?usp=sharing 
+
 ## Overview
 This demo application simulates the collection of recycling bins by virtual trucks. It is composed of four main components:
 

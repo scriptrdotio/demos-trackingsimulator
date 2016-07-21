@@ -1,12 +1,12 @@
 //Configuration file used by client side
 var config = {
   http: {
-    baseUrl: "https://itodemos.scriptrapps.io", //Scriptr api url
-    startSimulator: "simulator/api/start",
-    stopSimulator: "simulator/api/stop"
+    baseUrl: "YOUR_SCRIPTR_SUBDOMAIN"", //Scriptr api url
+    startSimulator: "trackingSimulator/api/start",
+    stopSimulator: "trackingSimulator/api/stop"
   },
   websocket: {
-    url: "wss://api.scriptrapps.io/UzIyQTgwRjc2Ng==",
+    url: "wss://api.scriptrapps.io/YOUR_SCRIPTR_ANON_TOKEN",//Socket URL
     receive_channel: "city_channel" //The Channel name to which the live GPS data will be pushed, and to which the client websocket will subscribe
   },
   map: {

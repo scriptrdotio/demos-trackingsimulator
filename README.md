@@ -44,3 +44,11 @@ Position is calculated using lat,long + random() * radius
   - TRIGGER, in api/start
 - Configuring the map
   - Update static/config.js  http baseUrl to point to your account subdomain & websocket url to have your own token.
+- In map.html, replace YOUR_SUBDOMAIN in the URL with your own sub-domain
+
+## How it works
+- Load map.html in a browser (http://your_sub_domain.scriptrapps.io/trackingSimulator/html/map.html)
+- Press start to start the simulation and wait a few seconds (if a simulation was running it is stopped)
+- Press stop to stop it (all data are cleared) 
+
+** Note: the current version does not allow your to run multiple paralle simuations **

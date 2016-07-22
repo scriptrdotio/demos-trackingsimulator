@@ -1,5 +1,6 @@
 var recyclingbinManagerModule = require("../recyclingbinmanager.js");
 var vehicleManagerModule = require("../vehiclemanager.js");
+var mainorchestration = require("../mainorchestration");
 
 var TRIGGER = "* * * * ?";
 
@@ -37,6 +38,9 @@ try {
   // schedule the execution of mainscheduler
   var handle = schedule("trackingSimulator/mainscheduler.js", TRIGGER).result.handle;
   storage.global.scheduler.handle = handle; 
+  
+  // first orchestration
+  mainorchestration.orchestrate();
   return handle;
 }catch(exception){
   return exception;

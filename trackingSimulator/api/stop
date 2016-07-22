@@ -7,14 +7,8 @@ try {
   var handle = storage.global.scheduler.handle;
   if (handle) {
    unschedule(handle);
+   storage.global.scheduler = {}; 
   }  
-  
-  /*
-   * initialize storage if needed
-   */
-  if (!storage.global.scheduler) {
-    storage.global.scheduler = {};
-  }
   
   if (!storage.global.city) {
     storage.global.city = {};

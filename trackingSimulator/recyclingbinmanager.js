@@ -4,7 +4,7 @@ var recyclingbinModule = require("./recyclingbin.js");
 var log = require("log");
 log.setLevel("info");
 
-var MAX_BINS = 15; // modify to raise or lower the number of recycling bins to return 
+var MAX_BINS = 7; // modify to raise or lower the number of recycling bins to return 
 
 /**
  * Manages the simulation of the behavior of multiple recycling bins

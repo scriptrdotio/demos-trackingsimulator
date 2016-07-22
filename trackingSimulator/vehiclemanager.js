@@ -4,7 +4,7 @@ var destinations = require("./directionservice.js");
 var log = require("log");
 log.setLevel("info");
 
-var MAX_VEHICLES = 7;
+var MAX_VEHICLES = 4;
 
 /**
  * Handles the simulation of multiple vehicles.

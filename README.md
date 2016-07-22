@@ -51,4 +51,4 @@ Position is calculated using lat,long + random() * radius
 - Press start to start the simulation and wait a few seconds (if a simulation was running it is stopped)
 - Press stop to stop it (all data are cleared) 
 
-** Note: the current version does not allow your to run multiple paralle simuations **
+**Note: the current version does not allow your to run multiple paralle simuations**

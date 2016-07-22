@@ -29,6 +29,8 @@ The UI subscribes to a channel using a WebSocket connection in order to receives
 - *directionservice*: wraps a direction service, currently Google Map Directions. Returns a route (points) from an origin to a destination
 - *util*: provides utiliy functions (generate id, transform polyline into an array of points, etc.)
 
+UI components are respectively distributed in /css, /html, /static and /scripts.
+
 ## Configuration
 - Create channel as anonymous publish/subscribe with "city_channel" as name.
 - Google Map directions API key

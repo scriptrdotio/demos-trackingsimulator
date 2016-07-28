@@ -1,0 +1,113 @@
+ var evrythngManagerModule = require("../evrythngmanager");
+var thng = require("../thng");
+var config = require("../auth/config");
+
+try {
+  
+  var data = {};
+  var evrythngManager = new evrythngManagerModule.EvrythngManager({key:config.operatorKey});
+  
+  /**
+   * Playing with things
+   */
+  
+  var thngManager = evrythngManager.getThngManager();
+  
+  /* 
+   * Create a Thng
+   */
+  var thingData = {name: "nest_home"};
+  //var thing = thngManager.createThing(thingData);
+  //data.createThing = thing;
+  
+  /*
+   * Update an existing Thng
+   */
+  //thing.description = "Home based nest thermostat";
+  //data.updateThing = thing.update(["description"]);
+  
+  /*
+   * List all things
+   */
+  
+  // list without pagination data
+  //data.listThings = thngManager.listThings();
+  
+  // list with pagination data
+   data.listThingsPaginated = thngManager.listThings({sortOrder: "descending", perPage: 3});
+  
+  if (data.listThingsPaginated && data.listThingsPaginated.nextPageToken) {
+    data.nextListThingsPaginated = thngManager.listThings({next:data.listThingsPaginated.nextPageToken});
+  }  
+  
+  if (data.listThings && data.listThings.length > 0) {
+    
+    /*
+     * Get a thing
+     */
+    var newThing = thngManager.getThing(data.listThings[0].id);
+    data.getThing = JSON.parse(JSON.stringify(newThing)); // fast clone the object
+    
+    /*
+     * Turn this thing into a device, i.e create an API Key for the thing
+     */
+    //data.createApiKey = newThing.createApiKey();    
+    //data.checkCreateApiKey = JSON.parse(JSON.stringify(newThing));
+    
+    /*
+     * Refresh the API key
+     */
+    //data.refreshApiKey = newThing.refreshApiKey();
+    //data.checkRefreshApiKey = JSON.parse(JSON.stringify(newThing));
+    
+    /*
+     * Delete the API Key
+     */
+    //data.deleteApiKey = newThing.deleteApiKey();
+    //data.checkDeleteApiKey = JSON.parse(JSON.stringify(newThing));
+    
+    /*
+     * Delete a thing
+     */
+    //data.deleteThing = thngManager.deleteThing(data.listThings[0].id);
+  }
+  
+  /*
+   * Playing with actions types and actions
+   */
+  var actionManager = evrythngManager.getActionManager();
+  
+  // create new action type
+  //var newActionType = actionManager.createActionType({name:"_adjustTemperature", customFields:{minValue:16, maxValue:30}, tags:["thermostat"]});
+  //data.createActionType = newActionType;
+  
+  // list existing action types
+  //data.listActionTypes = actionManager.listActionTypes();
+  
+  // create new action
+  //var newAction = actionManager.createAction({type:"_adjustTemperature"});
+  //data.createAction = newAction;
+  
+  // list existing actions
+  //data.listActions = actionManager.listActions();
+  
+  // list actions of a given type
+  //data.listActionsOfType = actionManager.listActions("_adjustTemperature");
+  
+  /*
+   * Playing with collections
+   */
+  
+  var collectionManager = evrythngManager.getCollectionManager();
+  
+  // create a new collection
+  //data.createCollection = collectionManager.createCollection({name:"thermostats", tags:["thermostats"]});
+  
+  // list collections
+  //data.listCollections = collectionManager.listCollections();
+  
+  
+  return data;
+}catch(exception) {
+  return exception;
+}

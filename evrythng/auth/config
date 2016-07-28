@@ -1,0 +1,18 @@
+var apiUrl = "https://api.evrythng.com";
+
+var apiVer = "";
+
+// Your Evrythng operator key
+var operatorKey = "";
+
+/**
+ * Use this variable to specify specific configuration per application
+ */
+var appConfig = {
+  
+  app_name : {
+   appId: "evrythng_app_id",
+   apiKey: "evrythng_API_KEY"
+  }
+  // add as many entries as needed
+}			

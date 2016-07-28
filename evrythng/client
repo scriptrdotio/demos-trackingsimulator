@@ -1,0 +1,143 @@
+ var config = require("./auth/config");
+var http = require("http");
+
+/**
+ * A generic http client that handles the communication with remote APIs
+ * @class Client
+ * @constructor Client
+ * @param {String} key : an App key or a User key
+ */
+function Client(dto) {
+  
+  if (!dto || !dto.key) {
+    
+    throw {
+      
+      errorCode: "Invalid_Parameter",
+      errorDetail: "Client. dto.key cannot be null or empty"
+    };
+  }
+  
+  this.key = dto.key;
+}
+
+/**
+ * Invoke a given API. If response status is 401, the method will try to obtain a new access token using the 
+ * current user's refresh token and retry the invocation of the target API.
+ * This method can throw exceptions
+ * @method callApi
+ * @param {Object} params : the parameters of the http call to issue
+ * 	{String} params.url : the url of the targeted API
+ *	{String} params.method : (optional) the http method to use when invoking the API
+ *	{Object} params.headers: (optional) the http headers to send to the API
+ *	{Object} params.params: (optional) the parameters that are expected by the API
+ */
+Client.prototype.callApi = function(params) {
+  
+  try {   
+     return this._callApi(params);
+  }catch(response) {   
+      this._handleError(response);
+  }
+};
+
+Client.prototype._callApi = function(params) {
+  
+  if (params.params) {
+    params.params = this._paramsToString(params.params);
+  }
+  
+  if (params.params && (!params.method || params.method == "GET")) {
+    params.params = this._paramsToString(params.params);
+  }
+  
+  if (params.params && (["POST", "PUT"].indexOf(params.method) > -1)) {
+    
+    params.bodyString = JSON.stringify(params.params);
+    delete params.params;
+  }
+  
+  params.url = params.url.indexOf("http") > -1 ? params.url : config.apiUrl + (config.apiVer ? "/" +  config.apiVer : "") + params.url;
+  
+  params.headers = params.headers ? params.headers : {};
+  params.headers["Authorization"] = this.key;
+  
+  var previous = "";
+  if (params.url.indexOf("nextPageToken") > -1) {
+    
+  }
+  
+  console.log("Sending the following request : " + JSON.stringify(params));
+  var response = http.request(params);
+  console.log("Received following response  : " + JSON.stringify(response));
+  if (response.status >= "200" && response.status < "300") {
+    
+    var responseBody = response.body ? JSON.parse(response.body) : {};
+    var pagination = {};
+    if (response.headers.link) {
+      
+      pagination.next = this._handlePagination(response.headers);
+      pagination.previous = params.url;
+    }
+    
+    if (responseBody.message) {
+      throw response;
+    }else {
+      return {
+        
+        body: responseBody,
+        next: pagination
+      };
+    }
+  }else {
+    throw response;
+  }
+};
+  
+Client.prototype._handleError = function(response) {
+   
+  var errorObj = "";
+  try {
+    
+    errorObj = JSON.parse(response.body);
+  }catch(e) {
+    
+    try {
+      errorObj = JSON.parse(response);
+    }catch(e) {
+      errorObj = response;
+    }
+  };
+
+  throw {
+    "errorCode": "Invocation_Error",
+    "errorDetail": errorObj
+  };
+};
+
+Client.prototype._handlePagination = function(header) {
+  
+  var link = header.link;
+  var linkSplit = link.split(";");
+  var url = decodeURIComponent(linkSplit[0]);
+  return url.substring(1, url.length - 1);
+};
+
+/*
+ * Transform all Numeric and boolean parameters to string so they can be passed to http.callApi
+ * (shallow only)
+ */
+Client.prototype._paramsToString = function(params) {
+  
+  var newParams = {};
+  for (var p in params) {
+    
+    if (typeof(params[p]) != "object") {
+    	newParams[p] = "" +  params[p];
+    }else {
+      newParams[p] = params[p];
+    }
+  }
+  
+  return newParams;
+};

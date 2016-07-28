@@ -1,0 +1,9 @@
+ // standard Evrythng action types as constants
+// you can add your own actions types into this map
+var actionTypes = {
+  
+  CHECKINS: "checkins",
+  IMPLICITSCANS: "implicitScans",
+  SCANS: "scans",
+  SHARES: "shares"
+};

@@ -1,0 +1,119 @@
+ var baseobjectModule = require("./baseobject");
+
+/**
+ * Represents a Thng in the Evrythng platform
+ * @class Thng
+ * @constructor
+ * @param {Object} [dto]
+ * @param {String} [dto.name] : mandatory
+ * @param {String} [dto.description]
+ * @param {String} [dto.product]
+ * @param {GeoJSON Point} [dto.location]
+ * @param {Object} [dto.identifiers]
+ * @param {Object} [dto.properties]
+ * @param {Array} [dto.tags]
+ * @param {Array} [dto.collections]
+ * @param {Array} [dto.customFields]
+ */
+function Thng(dto, client) {
+  
+  baseobjectModule.BaseObject.call(this, dto, client);
+  if (!dto.name) {
+    
+    throw {
+      errorCode: "Missing_Parameter",
+      errorDetail: "Thng. dto.name cannot be null or empty"
+    };
+  }
+}
+
+Thng.prototype = new baseobjectModule.BaseObject({inheritance:true});
+Thng.prototype.constructor = Thng;
+
+/**
+ * @method update
+ * @param {Array} propertyNames: the names of the properties that need to be updated on the platform
+ * @return {Object} update data structure of this thng
+ * @throw Error
+ */
+Thng.prototype.update = function(propertyNames) {
+  
+  var obj = {};
+  if (propertyNames) {
+    
+    for (var i = 0; i < propertyNames.length; i++) {
+      obj[propertyNames[i]] = this[propertyNames[i]]
+    }
+  }
+  
+  var instructionParams = {
+    
+    method: "PUT",
+    url: "/thngs/" + this.id,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    params: obj
+  };
+  
+  return this.client.callApi(instructionParams);  
+};
+
+/**
+ * Create an API Key to turn this thing into a device, i.e. allow the invocation of the thng executing on the platform
+ * The apiKey property of the current instance is created and filled with the obtained API key
+ * from code running on an actual device
+ * @method createApiKey
+ * @return {thngId, thngApiKey}
+ * @throw Error
+ */
+Thng.prototype.createApiKey = function() {
+  
+  var instructionParams = {
+    
+    method: "POST",
+    url: "/auth/evrythng/thngs",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    params: {"thngId": this.id}
+  };
+  
+  var response = this.client.callApi(instructionParams); 
+  this.apiKey = response.thngApiKey;console.log(JSON.stringify(this));
+  return response;
+};
+
+/**
+ * Delete the API Key that was associated to a device represented by the current Thng
+ * The apiKey property of the current instance is removed
+ * @method deleteApiKey
+ * @return empty object
+ * @throw Error
+ */
+Thng.prototype.deleteApiKey = function() {
+  
+  var instructionParams = {
+    
+    method: "DELETE",
+    url: "/auth/evrythng/thngs/" + this.id
+  };
+  
+  this.client.callApi(instructionParams);  
+  if (this.apiKey) {
+    delete this.apiKey
+  };
+  
+  return {};
+};
+
+/**
+ * @method refreshApiKey
+ * @return {thngId, thngApiKey}
+ * @throw Error
+ */
+Thng.prototype.refreshApiKey = function() {
+  
+  this.deleteApiKey();
+  return this.createApiKey();
+};

@@ -1,0 +1,36 @@
+ var clientModule = require("./client");
+var thngManagerModule = require("./thngmanager");
+var actionManagerModule = require("./actionmanager");
+var collectionManagerModule = require("./collectionmanager");
+
+/**
+ * @class EvrythngManager
+ * @constructor
+ * @param {Object} [dto]
+ * @param {Object} [dto.client]: instance of ./client.Client
+ */
+function EvrythngManager(dto) {
+  
+  if (!dto || !dto.key) {
+   
+    throw {
+      
+      errorCode: "Invalid_Parameter",
+      errorDetail: "EvrythngManager dto and dto.key cannot be null or empty"
+    };
+  }
+  
+  this.client = new clientModule.Client({key:dto.key});
+}
+
+EvrythngManager.prototype.getThngManager = function() {
+  return new thngManagerModule.ThngManager({client:this.client});
+};
+
+EvrythngManager.prototype.getActionManager = function() {
+  return new actionManagerModule.ActionManager({client:this.client});
+};
+
+EvrythngManager.prototype.getCollectionManager = function() {
+  return new collectionManagerModule.CollectionManager({client:this.client});
+};
